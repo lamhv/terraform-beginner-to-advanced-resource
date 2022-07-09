@@ -2,8 +2,8 @@
 gcloud init/gcloud config configurations create <configuration_name>
 gcloud info
 # List configurations
-```aidl
- ll ~/.config/gcloud/configurations 
+```shell script
+ll ~/.config/gcloud/configurations 
 total 16
 -rw-r--r--  1 lamhoang  staff  136 Jun 20 13:28 config_default
 -rw-r--r--  1 lamhoang  staff  121 Jun 17 11:04 config_lamhoang
