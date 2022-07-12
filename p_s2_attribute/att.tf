@@ -58,3 +58,15 @@ resource "google_compute_address" "internal_with_subnet_and_address" {
   address      = "10.0.42.42"
   region = "asia-southeast1"
 }
+
+output "eip" {
+  value = google_compute_address.static.address
+}
+
+output "xxx" {
+  value = google_compute_address.internal_with_subnet_and_address.id
+}
+
+output "yyy" {
+  value = google_compute_address.internal_with_subnet_and_address
+}
