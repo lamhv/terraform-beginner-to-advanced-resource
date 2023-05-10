@@ -13,4 +13,13 @@ NAME      IS_ACTIVE  ACCOUNT                 PROJECT                  COMPUTE_DE
 default   True       lam@trustingsocial.com  prj-ts-p-etl-infra-45d9  asia-southeast1-a     asia-southeast1
 lamhoang  False      admin@ai4u.io           fb-crawler-331309        asia-southeast1-a     asia-southeast1
 
+gcloud config configurations activate my-config
+```
+
+```shell script
+bq show --schema --format=prettyjson prj-ts-p-etl-infra-45d9:v2_proxy.customer_history > schema.json
+bq mk --table --description [DESCRIPTION] [PROJECT_ID]:[DATASET].[TABLE] ./schema.json
+
+-- For RECORD type: work only for MODE NULLABLE
+bq update data-engineering-230006:lamhoang_cdc.application_metadata_changelog /tmp/schema.json
 ```
