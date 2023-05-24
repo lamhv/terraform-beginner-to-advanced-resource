@@ -1,0 +1,22 @@
+Outputs:
+
+eip = "34.142.151.125"
+xxx = "projects/data-engineering-230006/regions/asia-southeast1/addresses/lamhoang-my-internal-address"
+yyy = {
+  "address" = "10.0.42.42"
+  "address_type" = "INTERNAL"
+  "creation_timestamp" = "2023-05-24T04:19:33.101-07:00"
+  "description" = ""
+  "id" = "projects/data-engineering-230006/regions/asia-southeast1/addresses/lamhoang-my-internal-address"
+  "name" = "lamhoang-my-internal-address"
+  "network" = ""
+  "network_tier" = "PREMIUM"
+  "prefix_length" = 0
+  "project" = "data-engineering-230006"
+  "purpose" = "GCE_ENDPOINT"
+  "region" = "asia-southeast1"
+  "self_link" = "https://www.googleapis.com/compute/v1/projects/data-engineering-230006/regions/asia-southeast1/addresses/lamhoang-my-internal-address"
+  "subnetwork" = "https://www.googleapis.com/compute/v1/projects/data-engineering-230006/regions/asia-southeast1/subnetworks/lamhoang-my-subnet"
+  "timeouts" = null /* object */
+  "users" = tolist([])
+}
