@@ -28,6 +28,8 @@ resource "google_compute_instance" "vm_instance" {
     network = google_compute_network.vpc_network.self_link
     subnetwork = google_compute_subnetwork.subnetwork.self_link
     network_ip = google_compute_address.internal_with_subnet_and_address.id
+
+    # attach IP to instance
     access_config {
       nat_ip = google_compute_address.static.address
     }
@@ -35,15 +37,18 @@ resource "google_compute_instance" "vm_instance" {
 
 }
 
+# Create a VPC network with disabled subnet creation
 resource "google_compute_network" "vpc_network" {
   name                    = "lamhoang-terraform-network"
   auto_create_subnetworks = "false"
 }
 
+# Create static IP address
 resource "google_compute_address" "static" {
   name = "ipv4-address"
 }
 
+# Create a subnet
 resource "google_compute_subnetwork" "subnetwork" {
   name          = "lamhoang-my-subnet"
   ip_cidr_range = "10.0.0.0/16"
@@ -51,12 +56,30 @@ resource "google_compute_subnetwork" "subnetwork" {
   network       = google_compute_network.vpc_network.id
 }
 
+# Create an internal IP address
 resource "google_compute_address" "internal_with_subnet_and_address" {
   name         = "lamhoang-my-internal-address"
   subnetwork   = google_compute_subnetwork.subnetwork.id
   address_type = "INTERNAL"
   address      = "10.0.42.42"
   region = "asia-southeast1"
+}
+
+# create firewall rule
+resource "google_compute_firewall" "default" {
+  name    = "lamhoang-firewall"
+  network = google_compute_network.vpc_network.id
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080", "1000-2000"]
+  }
+
+  source_ranges = [google_compute_subnetwork.subnetwork.ip_cidr_range]
 }
 
 output "eip" {
