@@ -51,7 +51,7 @@ resource "google_compute_address" "static" {
 # Create a subnet
 resource "google_compute_subnetwork" "subnetwork" {
   name          = "lamhoang-my-subnet"
-  ip_cidr_range = "10.0.0.0/16"
+  ip_cidr_range = var.subnet_range_ip
   region = "asia-southeast1"
   network       = google_compute_network.vpc_network.id
 }
@@ -61,7 +61,7 @@ resource "google_compute_address" "internal_with_subnet_and_address" {
   name         = "lamhoang-my-internal-address"
   subnetwork   = google_compute_subnetwork.subnetwork.id
   address_type = "INTERNAL"
-  address      = "10.0.42.42"
+  address      = var.private_ip
   region = "asia-southeast1"
 }
 
@@ -76,7 +76,7 @@ resource "google_compute_firewall" "default" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080", "1000-2000"]
+    ports    = var.range_ports
   }
 
   source_ranges = [google_compute_subnetwork.subnetwork.ip_cidr_range]
